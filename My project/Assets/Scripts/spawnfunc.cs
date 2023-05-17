@@ -11,8 +11,8 @@ public class spawnfunc : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space))
-            {
-                 Instantiate(myObjects, transform.position, Quaternion.identity);
-            }
+        {
+            Instantiate(myObjects, transform.position, Quaternion.identity);
+        }
     }
 }
