@@ -2,13 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Image = UnityEngine.UI.Image;
 
 public class CubeManager : MonoBehaviour
 {
     public GameObject cube;
     public Transform spawner;
     public List<GameObject> _spawnedCubes = new List<GameObject>();
-
+    
+    public GameObject image;
+    public Transform scrollview;
+    public List<GameObject> _spawnedImages = new List<GameObject>();
+    
     public void AddCubeToScene()
     {
         var newCube = Instantiate(cube, spawner);
@@ -22,11 +29,17 @@ public class CubeManager : MonoBehaviour
         Rigidbody cubeRigidbody = newCube.GetComponent<Rigidbody>();
         cubeRigidbody.useGravity = true;
         cubeRigidbody.mass = 0.5f;
-        Physics.gravity = new Vector3(0f, -400f, 0f);
+        Physics.gravity = new Vector3(0f, Random.Range(-200,-600f), 0f);
 
-        cubeScript.size = new Vector3(Random.Range(0, 700), 0, Random.Range(0, 700));
-        cubeScript.rotation = Quaternion.Euler(rnd.Next(1, 360), rnd.Next(1, 360), rnd.Next(1, 360));
-        cubeScript.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+        //cubeScript.size = new Vector3(Random.Range(0, 700), 0, Random.Range(0, 700)); 
+        cubeScript.rotation = Quaternion.Euler(rnd.Next(0, 360), rnd.Next(0, 360), rnd.Next(0, 360));
+        //cubeScript.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+    }
+    
+    public void AddImageToView()
+    {
+        var newImage = Instantiate(image, scrollview);
+        _spawnedImages.Add(newImage);
     }
 
     public void Update()
@@ -44,6 +57,7 @@ public class CubeManager : MonoBehaviour
                 GameObject hitCube = hit.collider.gameObject;
 
                 // Remove the cube
+                
                 _spawnedCubes.Remove(hitCube);
                 Destroy(hitCube);
             }
