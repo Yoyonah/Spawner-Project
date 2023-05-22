@@ -1,22 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
-public class CubeCounter : MonoBehaviour
+public class cubecounter : MonoBehaviour
 {
-    public CubeManager cubeManager;
-    private TextMeshProUGUI counterText;
+    public TextMeshProUGUI numbertext;
+    private spawnfunc spawner; // Corrected the type declaration
+
+
 
     private void Start()
     {
-        counterText = GetComponent<TextMeshProUGUI>();
+        if (GetComponent<spawnfunc>())
+        {
+            spawner = GetComponent<spawnfunc>(); // Assign the component reference in Start() or Awake()
+        }
+        else
+        {
+
+        }
+        
     }
 
-    private void Update()
+    // Update is called once per frame
+    void Update()
     {
-        // Update the counter text with the current cube count
-        counterText.text = "Cube Count: " + cubeManager._spawnedCubes.Count.ToString();
+        numbertext.text = spawner.ObjectList.Count.ToString();
     }
 }
