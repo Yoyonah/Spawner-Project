@@ -354,14 +354,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.0035323068, y: -0, z: -0, w: 0.9999938}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 368, y: 108, z: -691}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -0.405, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963197712
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,7 +397,7 @@ MonoBehaviour:
   ObjectList: []
   GridList: []
   scrollRect: {fileID: 0}
-  objectPrefab: {fileID: 0}
+  image: {fileID: 0}
 --- !u!4 &963197714
 Transform:
   m_ObjectHideFlags: 0
@@ -422,9 +422,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 963197712}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fab4e721382c2dd4697134b113f48188, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b7679a19d7b78d4e91514bad4e73caa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawner: {fileID: 0}
+  targetImage: {fileID: 2513180046054346054, guid: 46009cacb1090224f9fc1ea80da01065, type: 3}
+  button: {fileID: -7403012335712473215, guid: 46009cacb1090224f9fc1ea80da01065, type: 3}
 --- !u!1 &1041066316
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,8 +440,6 @@ GameObject:
   - component: {fileID: 1041066320}
   - component: {fileID: 1041066319}
   - component: {fileID: 1041066318}
-  - component: {fileID: 1041066324}
-  - component: {fileID: 1041066325}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -530,37 +531,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1041066324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1041066316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e03fac936e1d85248b9bf9c8e612a1ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myObject: {fileID: 3905000845256782174, guid: 225fb2ccadd785548abe47163d18c740, type: 3}
-  spawner: {fileID: 963197714}
-  ObjectList: []
-  GridList: []
-  scrollRect: {fileID: 1218812647}
-  objectPrefab: {fileID: 7174988186015085234, guid: 079f38b559f3c44499dc9e27ab87c944, type: 3}
---- !u!114 &1041066325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1041066316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ff85cd83e452df4fbe22cb0307352c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numbertext: {fileID: 1188280243}
 --- !u!1 &1188280242
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,7 +749,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -887,6 +857,7 @@ GameObject:
   - component: {fileID: 1468806617}
   - component: {fileID: 1468806618}
   - component: {fileID: 1468806619}
+  - component: {fileID: 1468806620}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1026,7 +997,7 @@ MonoBehaviour:
   ObjectList: []
   GridList: []
   scrollRect: {fileID: 1218812647}
-  objectPrefab: {fileID: 7174988186015085234, guid: 079f38b559f3c44499dc9e27ab87c944, type: 3}
+  image: {fileID: 6440828559068676598, guid: 46009cacb1090224f9fc1ea80da01065, type: 3}
 --- !u!114 &1468806618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1040,6 +1011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numbertext: {fileID: 1188280243}
+  spawner: {fileID: 0}
 --- !u!114 &1468806619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1052,6 +1024,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fab4e721382c2dd4697134b113f48188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1468806620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468806612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b7679a19d7b78d4e91514bad4e73caa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawner: {fileID: 0}
+  targetImage: {fileID: 2513180046054346054, guid: 46009cacb1090224f9fc1ea80da01065, type: 3}
+  button: {fileID: -7403012335712473215, guid: 46009cacb1090224f9fc1ea80da01065, type: 3}
 --- !u!1 &1556450567
 GameObject:
   m_ObjectHideFlags: 0

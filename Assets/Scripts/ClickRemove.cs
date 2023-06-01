@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ClickRemove : MonoBehaviour
 {
     private spawnfunc spawner;
+    //public Image targetImage;
+    
 
     void Update()
     {
@@ -15,17 +18,17 @@ public class ClickRemove : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                GameObject clickedObject = hit.transform.gameObject;
+                var clickedObject = hit.transform.gameObject;
+                //Debug.Log(clickedObject.name);
                 
-                GameObject gridToRemove = spawner.GridList.Find(obj => obj.name == clickedObject.name);
+                var gridToRemove = spawner.GridList.Find(obj => obj.name == clickedObject.name);
                 spawner.GridList.Remove(gridToRemove);
                 Destroy(gridToRemove);
+                
                 GameObject objectToRemove = spawner.ObjectList.Find(obj => obj.name == clickedObject.name);
                 spawner.ObjectList.Remove(objectToRemove);
                 Destroy(objectToRemove);
-                
 
-                
             }
         }
     }
