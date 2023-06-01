@@ -32,9 +32,6 @@ We welcome contributions to enhance and improve Spawning Project. If you would l
 4. Push your changes to your forked repository.
 5. Submit a pull request, detailing the changes you've made.
 
-## License
-???
-
 ## Credits
 - Developed by Berry, Yonah, and Oliver
 
