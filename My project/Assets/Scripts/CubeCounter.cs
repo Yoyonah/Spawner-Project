@@ -16,7 +16,8 @@ public class CubeCounter : MonoBehaviour
 
     private void Update()
     {
+        // use a guard clause
         // Update the counter text with the current cube count
-        counterText.text = "Cube Count: " + cubeManager._spawnedCubes.Count.ToString();
+        counterText.text = "Cube Count: " + cubeManager.spawnedCubes.Count.ToString();
     }
 }

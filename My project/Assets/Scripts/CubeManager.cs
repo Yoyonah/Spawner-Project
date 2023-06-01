@@ -1,28 +1,30 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 using Image = UnityEngine.UI.Image;
+using Random = UnityEngine.Random;
 
 public class CubeManager : MonoBehaviour
 {
     public GameObject cube;
     public Transform spawner;
-    public List<GameObject> _spawnedCubes = new List<GameObject>();
+    public List<GameObject> spawnedCubes = new List<GameObject>();
     
     public GameObject image;
     public Transform scrollview;
-    public List<GameObject> _spawnedImages = new List<GameObject>();
-    
+    public List<GameObject> spawnedImages = new List<GameObject>();
+
     public void AddCubeToScene()
     {
+        int randomnumber = Random.Range(0, 9999);
         var newCube = Instantiate(cube, spawner);
         var cubeScript = newCube.GetComponent<Cubes>();
+        var rndColor = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
         var rnd = new System.Random();
-        _spawnedCubes.Add(newCube);
+        spawnedCubes.Add(newCube);
 
+        newCube.name = "object " + randomnumber.ToString();
         Vector3 spawnPosition = spawner.position + new Vector3(Random.Range(-200, 300), 0, Random.Range(-200, 300));
         newCube.transform.position = spawnPosition;
 
@@ -31,16 +33,35 @@ public class CubeManager : MonoBehaviour
         cubeRigidbody.mass = 0.5f;
         Physics.gravity = new Vector3(0f, Random.Range(-200,-600f), 0f);
 
-        //cubeScript.size = new Vector3(Random.Range(0, 700), 0, Random.Range(0, 700)); 
-        cubeScript.rotation = Quaternion.Euler(rnd.Next(0, 360), rnd.Next(0, 360), rnd.Next(0, 360));
-        //cubeScript.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+        newCube.transform.rotation = Quaternion.Euler(rnd.Next(0, 360), rnd.Next(0, 360), rnd.Next(0, 360));
+        newCube.GetComponent<Renderer>().material.color = rndColor;
+        AddImageToView(rndColor, newCube.name, newCube);
+    }
+
+    public void AddImageToView(Color random, String objectName, GameObject cubeReference)
+    {
+        scrollview = GameObject.Find("Content").transform;
+        var newImage = Instantiate(image, scrollview);
+        var imageComponent = newImage.GetComponent<Image>();
+        imageComponent.color = random;
+        spawnedImages.Add(newImage);
+        newImage.name = objectName;
+        newImage.GetComponent<Button>().onClick.AddListener(() => OnClickRemoveImage(newImage, cubeReference));
     }
     
-    public void AddImageToView()
+    public void OnClickRemoveImage(GameObject imageToRemove, GameObject cubeToRemove)
     {
-        var newImage = Instantiate(image, scrollview);
-        _spawnedImages.Add(newImage);
+        spawnedImages.Remove(imageToRemove);
+        spawnedCubes.Remove(cubeToRemove);
+        Destroy(imageToRemove);
+        Destroy(cubeToRemove);
     }
+
+    public void ExitApp()
+    {
+        Application.Quit();
+    }
+    
 
     public void Update()
     {
@@ -51,15 +72,17 @@ public class CubeManager : MonoBehaviour
             RaycastHit hit;
 
             // Check if the ray hits any objects with the "Cubes" tag
-            if (Physics.Raycast(ray, out hit) && hit.collider.CompareTag("Cubes"))
+            if (Physics.Raycast(ray, out hit) && hit.collider.CompareTag("Cubes")) 
             {
                 // Get the hit cube object
-                GameObject hitCube = hit.collider.gameObject;
+                GameObject hitObject = hit.collider.gameObject;
 
-                // Remove the cube
-                
-                _spawnedCubes.Remove(hitCube);
-                Destroy(hitCube);
+                var imageToRemove = spawnedImages.Find(obj => obj.name == hitObject.name);
+                var cubeToRemove = spawnedCubes.Find(obj => obj.name == hitObject.name);
+                spawnedImages.Remove(imageToRemove);
+                Destroy(imageToRemove);
+                spawnedCubes.Remove(cubeToRemove);
+                Destroy(cubeToRemove);
             }
         }
     }
